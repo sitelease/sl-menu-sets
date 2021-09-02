@@ -1,6 +1,6 @@
 <?php
 
-namespace gorriecoe\Menu\Extensions;
+namespace Sitelease\LinkMenu\Extensions;
 
 use SilverStripe\Subsites\Model\Subsite;
 use SilverStripe\Forms\FieldList;

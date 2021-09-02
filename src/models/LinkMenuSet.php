@@ -1,6 +1,6 @@
 <?php
 
-namespace gorriecoe\Menu\Models;
+namespace Sitelease\LinkMenu\Models;
 
 use GraphQL\Type\Definition\ResolveInfo;
 use SilverStripe\Control\Controller;
@@ -29,7 +29,7 @@ use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
  * @method HasManyList|MenuLink[] Links()
  * @package silverstripe-menu
  */
-class MenuSet extends DataObject implements
+class LinkMenuSet extends DataObject implements
     PermissionProvider,
     ScaffoldingProvider
 {
@@ -37,7 +37,7 @@ class MenuSet extends DataObject implements
      * Defines the database table name
      * @var string
      */
-    private static $table_name = 'MenuSet';
+    private static $table_name = 'SL_MenuSet';
 
     /**
      * Singular name for CMS
@@ -124,7 +124,7 @@ class MenuSet extends DataObject implements
     public function providePermissions()
     {
         $permissions = [];
-        foreach (MenuSet::get() as $menuset) {
+        foreach (LinkMenuSet::get() as $menuset) {
             $key = $menuset->PermissionKey();
             $permissions[$key] = [
                 'name'     => _t(
@@ -188,7 +188,7 @@ class MenuSet extends DataObject implements
 
         // If canEdit() is called on an unsaved singleton, default to any users with CMS access
         // This allows MenuLink objects to be created via gridfield,
-        // which will call the singleton MenuSet::canEdit()
+        // which will call the singleton LinkMenuSet::canEdit()
         return Permission::check('CMS_ACCESS', 'any', $member);
     }
 
@@ -222,9 +222,9 @@ class MenuSet extends DataObject implements
                 $allowChildren = false;
             }
             $slug = Convert::raw2htmlid($slug);
-            $record = MenuSet::get()->find('Slug', $slug);
+            $record = LinkMenuSet::get()->find('Slug', $slug);
             if (!$record) {
-                $record = MenuSet::create();
+                $record = LinkMenuSet::create();
                 DB::alteration_message("Menu '$title' created", 'created');
             } else {
                 DB::alteration_message("Menu '$title' updated", 'updated');
@@ -256,7 +256,7 @@ class MenuSet extends DataObject implements
     /**
      * Return the first menuset matching the given slug.
      *
-     * @return gorriecoe\Menu\Models\MenuSet|Null
+     * @return Sitelease\LinkMenu\Models\LinkMenuSet|Null
      */
     public static function get_by_slug($slug)
     {
@@ -278,7 +278,7 @@ class MenuSet extends DataObject implements
 
     public function provideGraphQLScaffolding(SchemaScaffolder $scaffolder)
     {
-        $scaffolder->type(MenuSet::class)
+        $scaffolder->type(LinkMenuSet::class)
             ->addAllFields()
             ->nestedQuery('Links')
             ->setUsePagination(false)
@@ -297,20 +297,20 @@ class MenuSet extends DataObject implements
             ->setName('deleteMenuSet')
             ->end()
             ->end()
-            ->query('readOneMenuSet', MenuSet::class)
+            ->query('readOneMenuSet', LinkMenuSet::class)
             ->setUsePagination(false)
             ->addArgs([
                 'Slug' => 'String!'
             ])
             ->setResolver(function ($object, array $args, $context, ResolveInfo $info) {
-                if (!singleton(MenuSet::class)->canView($context['currentUser'])) {
+                if (!singleton(LinkMenuSet::class)->canView($context['currentUser'])) {
                     throw new \InvalidArgumentException(sprintf(
                         '%s view access not permitted',
-                        MenuSet::class
+                        LinkMenuSet::class
                     ));
                 }
                 if ($args['Slug']) {
-                    return MenuSet::get()->find('Slug', $args['Slug']);
+                    return LinkMenuSet::get()->find('Slug', $args['Slug']);
                 }
             })
             ->end();

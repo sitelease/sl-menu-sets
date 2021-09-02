@@ -1,12 +1,12 @@
 <?php
 
-namespace gorriecoe\Menu\View;
+namespace Sitelease\LinkMenu\View;
 
-use gorriecoe\Menu\Models\MenuSet;
+use Sitelease\LinkMenu\Models\LinkMenuSet;
 use SilverStripe\View\TemplateGlobalProvider;
 
 /**
- * Adds MenuSet variable to templates
+ * Adds LinkMenuSet variable to templates
  *
  * @package silverstripe-menu
  */
@@ -18,21 +18,21 @@ class MenuManagerTemplateProvider implements TemplateGlobalProvider
     public static function get_template_global_variables()
     {
         return [
-            'MenuSet' => 'MenuSet'
+            'LinkMenuSet' => 'LinkMenuSet'
         ];
     }
 
     /**
-     * @param String $slug
-     * @return ArrayList|Null
+     * @param string $name
+     * @return DataList|false
      */
-    public static function MenuSet($slug)
+    public static function LinkMenuSet($name)
     {
-        if (!$slug) {
+        if (!$name) {
             return;
         }
-        if ($menuSet = MenuSet::get_by_slug($slug)) {
-            return $menuSet->Links();
+        if ($linkMenuSet = LinkMenuSet::get_by_name($name)) {
+            return $linkMenuSet->Links();
         }
     }
 }

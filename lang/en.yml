@@ -1,14 +1,14 @@
 en:
-  gorriecoe\Menu\Admin\MenuSetAdmin:
+  Sitelease\LinkMenu\Admin\LinkMenuSetAdmin:
     MENUTITLE: Menus
-  gorriecoe\Menu\Models\MenuLink:
+  Sitelease\LinkMenu\Models\MenuLink:
     CHILDREN: Children
     PLURALNAME: Links
     PLURALS:
       one: 'A Link'
       other: '{count} Links'
     SINGULARNAME: Link
-  gorriecoe\Menu\Models\MenuSet:
+  Sitelease\LinkMenu\Models\LinkMenuSet:
     FIELDLINKS: Links
     PLURALNAME: Menus
     PLURALS:

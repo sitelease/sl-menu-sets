@@ -1,8 +1,8 @@
 <?php
 
-namespace gorriecoe\Menu\Admin;
+namespace Sitelease\LinkMenu\Admin;
 
-use gorriecoe\Menu\Models\MenuSet;
+use Sitelease\LinkMenu\Models\LinkMenuSet;
 use SilverStripe\Admin\ModelAdmin;
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Forms\FieldList;
@@ -26,7 +26,7 @@ class MenuSetAdmin extends ModelAdmin
      * @var array
      */
     private static $managed_models = [
-        MenuSet::class
+        LinkMenuSet::class
     ];
 
     /**
@@ -67,21 +67,7 @@ class MenuSetAdmin extends ModelAdmin
                 GridFieldImportButton::class,
                 GridFieldExportButton::class,
                 GridFieldPrintButton::class,
-                GridFieldDeleteAction::class
             ]);
         return $form;
-    }
-
-    /**
-     * @param Member $member
-     * @return boolean
-     */
-    public function canView($member = null)
-    {
-        $sets = Config::inst()->get(MenuSet::class, 'sets');
-        if (!isset($sets) || !count($sets)) {
-            return false;
-        }
-        return parent::canView($member);
     }
 }

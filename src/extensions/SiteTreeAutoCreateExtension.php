@@ -1,9 +1,9 @@
 <?php
 
-namespace gorriecoe\Menu\Extensions;
+namespace Sitelease\LinkMenu\Extensions;
 
-use gorriecoe\Menu\Models\MenuSet;
-use gorriecoe\Menu\Models\MenuLink;
+use Sitelease\LinkMenu\Models\LinkMenuSet;
+use Sitelease\LinkMenu\Models\MenuLink;
 use SilverStripe\ORM\ArrayList;
 use SilverStripe\ORM\DataExtension;
 
@@ -26,9 +26,9 @@ class SiteTreeAutoCreateExtension extends DataExtension
         $owns = $owner->config()->get('owns_menu') ? : [];
         $menuSets = ArrayList::create();
 
-        foreach ($owns as $key => $slug) {
-            if ($menuSet = MenuSet::get_by_slug($slug)) {
-                $menuSets->push($menuSet);
+        foreach ($owns as $key => $name) {
+            if ($linkMenuSet = LinkMenuSet::get_by_name($name)) {
+                $menuSets->push($linkMenuSet);
             }
         }
         return $menuSets;
@@ -40,14 +40,14 @@ class SiteTreeAutoCreateExtension extends DataExtension
     public function onAfterPublish()
     {
         $owner = $this->owner;
-        foreach ($owner->OwnsMenu as $menuSet) {
-            $menuLink = MenuLink::get_by_sitetreeID($menuSet, $owner->ID);
+        foreach ($owner->OwnsMenu as $linkMenuSet) {
+            $menuLink = MenuLink::get_by_sitetreeID($linkMenuSet, $owner->ID);
             if ($menuLink) {
                 $menuLink->setField('Title', $owner->MenuTitle);
             } else {
                 $menuLink = MenuLink::create([
                     'Type' => 'SiteTree',
-                    'MenuSetID' => $menuSet->ID,
+                    'LinkMenuSetID' => $linkMenuSet->ID,
                     'SiteTreeID' => $owner->ID
                 ]);
             };
@@ -61,8 +61,8 @@ class SiteTreeAutoCreateExtension extends DataExtension
     public function onBeforeUnpublish()
     {
         $owner = $this->owner;
-        foreach ($owner->OwnsMenu as $menuSet) {
-            $menuLink = MenuLink::get_by_sitetreeID($menuSet, $owner->ID);
+        foreach ($owner->OwnsMenu as $linkMenuSet) {
+            $menuLink = MenuLink::get_by_sitetreeID($linkMenuSet, $owner->ID);
             if ($menuLink) {
                 $menuLink->delete();
             }
@@ -76,8 +76,8 @@ class SiteTreeAutoCreateExtension extends DataExtension
     {
         $owner = $this->owner;
 
-        foreach ($owner->OwnsMenu as $menuSet) {
-            $menuLink = MenuLink::get_by_sitetreeID($menuSet, $owner->ID);
+        foreach ($owner->OwnsMenu as $linkMenuSet) {
+            $menuLink = MenuLink::get_by_sitetreeID($linkMenuSet, $owner->ID);
             if ($menuLink) {
                 $menuLink->delete();
             }

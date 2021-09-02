@@ -1,11 +1,11 @@
-# Silverstripe menus
+# Silverstripe Link Menus
 
-Adds multiple menus that are defined via yml and managed via the cms.
+Similar to [Gorrie Coe's silverstripe-menu module](https://github.com/gorriecoe/silverstripe-menu) but it allows users to create items within the CMS admin interface as well
 
 ## Installation
 Composer is the recommended way of installing SilverStripe modules.
 ```
-composer require gorriecoe/silverstripe-menu
+composer require sitelease/silverstripe-menu
 ```
 
 ## Requirements
@@ -16,14 +16,14 @@ composer require gorriecoe/silverstripe-menu
 
 ## Maintainers
 
-- [Gorrie Coe](https://github.com/gorriecoe)
+- [Benjamin](https://github.com/mooror)
 
 ## Creating custom menus
 
-As it is common to reference MenuSets by slug in templates, you can configure sets to be created automatically during the /dev/build task. These sets cannot be deleted through the CMS.
+As it is common to reference MenuSets by name/title in templates, you can configure sets to be created automatically during the /dev/build task. These sets cannot be deleted through the CMS.
 
 ```
-gorriecoe\Menu\Models\MenuSet:
+Sitelease\LinkMenu\Models\LinkMenuSet:
   sets:
     main: Main menu
     secondary: Another menu
@@ -34,7 +34,7 @@ gorriecoe\Menu\Models\MenuSet:
 By default menus will be flat, which means links can not have child links associated with them.  If you need a nested menu structure, you can do so by adding `allow_children: true` to the yml file as shown below.
 
 ```
-gorriecoe\Menu\Models\MenuSet:
+Sitelease\LinkMenu\Models\LinkMenuSet:
   sets:
     footer:
       title: Footer menu
@@ -52,7 +52,7 @@ If you need to automatically add links to a menu after the creation of a page, y
 ```
 Page:
   extensions:
-    - gorriecoe\Menu\Extensions\SiteTreeAutoCreateExtension
+    - Sitelease\LinkMenu\Extensions\SiteTreeAutoCreateExtension
   owns_menu:
     - main
     - footer
@@ -62,7 +62,7 @@ Page:
 
 ```
 <ul>
-    <% loop MenuSet('footer') %>
+    <% loop LinkMenuSet('footer') %>
         <li>
             {$Me}
         </li>

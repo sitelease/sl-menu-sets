@@ -1,6 +1,6 @@
 <?php
 
-namespace gorriecoe\Menu\Models;
+namespace Sitelease\LinkMenu\Models;
 
 use gorriecoe\Link\Models\Link;
 use SilverStripe\Forms\FieldList;
@@ -17,7 +17,7 @@ use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
 /**
  * MenuLink
  *
- * @property int $MenuSetID
+ * @property int $LinkMenuSetID
  * @property int $ParentID
  * @property int $Sort
  * @method MenuLink Parent()
@@ -31,7 +31,7 @@ class MenuLink extends Link implements
      * Defines the database table name
      * @var string
      */
-    private static $table_name = 'MenuLink';
+    private static $table_name = 'SL_MenuLink';
 
     /**
      * Singular name for CMS
@@ -58,7 +58,7 @@ class MenuLink extends Link implements
      * @var array
      */
     private static $has_one = [
-        'MenuSet' => MenuSet::class,
+        'LinkMenuSet' => LinkMenuSet::class,
         'Parent'  => MenuLink::class
     ];
 
@@ -115,18 +115,18 @@ class MenuLink extends Link implements
     }
 
     /**
-     * Inherit menuset from parent, if not directly assigned
+     * Inherit linkMenuSet from parent, if not directly assigned
      *
-     * @return MenuSet
+     * @return LinkMenuSet
      */
-    public function MenuSet()
+    public function LinkMenuSet()
     {
         if ($this->ParentID) {
-            return $this->Parent()->MenuSet();
+            return $this->Parent()->LinkMenuSet();
         }
-        /** @var MenuSet $menuSet */
-        $menuSet = $this->getComponent('MenuSet');
-        return $menuSet;
+        /** @var LinkMenuSet $linkMenuSet */
+        $linkMenuSet = $this->getComponent('LinkMenuSet');
+        return $linkMenuSet;
     }
 
     /**
@@ -135,7 +135,7 @@ class MenuLink extends Link implements
      */
     public function isAllowedChildren()
     {
-        return $this->isInDB() && $this->MenuSet()->AllowChildren;
+        return $this->isInDB() && $this->LinkMenuSet()->AllowChildren;
     }
 
     /**
@@ -186,7 +186,7 @@ class MenuLink extends Link implements
         if ($extended !== null) {
             return $extended;
         }
-        return $this->MenuSet()->canEdit($member);
+        return $this->LinkMenuSet()->canEdit($member);
     }
 
     /**
@@ -200,7 +200,7 @@ class MenuLink extends Link implements
         if ($extended !== null) {
             return $extended;
         }
-        return $this->MenuSet()->canEdit($member);
+        return $this->LinkMenuSet()->canEdit($member);
     }
 
     /**
@@ -219,7 +219,7 @@ class MenuLink extends Link implements
         if (isset($context['Parent'])) {
             return $context['Parent']->canEdit();
         }
-        return $this->MenuSet()->canEdit();
+        return $this->LinkMenuSet()->canEdit();
     }
 
     public function provideGraphQLScaffolding(SchemaScaffolder $scaffolder)
@@ -251,24 +251,24 @@ class MenuLink extends Link implements
     }
 
     /**
-     * Return the first menulink matching the given MenuSet and SiteTreeID.
+     * Return the first menulink matching the given LinkMenuSet and SiteTreeID.
      *
-     * @param gorriecoe\Menu\Models\MenuSet|String
+     * @param Sitelease\LinkMenu\Models\LinkMenuSet|String
      * @param Int
      *
-     * @return gorriecoe\Menu\Models\MenuLink|Null
+     * @return Sitelease\LinkMenu\Models\MenuLink|Null
      */
-    public static function get_by_sitetreeID($menuSet, int $siteTreeID)
+    public static function get_by_sitetreeID($linkMenuSet, int $siteTreeID)
     {
-        if (!$menuSet instanceof MenuSet) {
-            $menuSet = MenuSet::get_by_slug($menuSet);
+        if (!$linkMenuSet instanceof LinkMenuSet) {
+            $linkMenuSet = LinkMenuSet::get_by_name($linkMenuSet);
         }
-        if (!$menuSet) {
+        if (!$linkMenuSet) {
             return;
         }
         return DataObject::get_one(self::class, [
             'Type'       => 'SiteTree', // Ensures the admin hasn't intentionally changed this link
-            'MenuSetID'  => $menuSet->ID,
+            'LinkMenuSetID'  => $linkMenuSet->ID,
             'SiteTreeID' => $siteTreeID
         ]);
     }
@@ -294,8 +294,8 @@ class MenuLink extends Link implements
         if ($this->ParentID) {
             $siblings = $siblings->filter('ParentID', $this->ParentID);
         }
-        if ($this->MenuSetID) {
-            $siblings = $siblings->filter('MenuSetID', $this->MenuSetID);
+        if ($this->LinkMenuSetID) {
+            $siblings = $siblings->filter('LinkMenuSetID', $this->LinkMenuSetID);
         }
         return $siblings;
     }

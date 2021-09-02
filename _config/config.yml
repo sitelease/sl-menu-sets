@@ -3,9 +3,9 @@ Name: menuconfig
 Only:
   moduleexists: silverstripe/subsite
 ---
-gorriecoe\Menu\Models\MenuSet:
+Sitelease\LinkMenu\Models\LinkMenuSet:
   extensions:
-    - gorriecoe\Menu\Extensions\MenuSetSubsiteExtension
+    - Sitelease\LinkMenu\Extensions\LinkMenuSetSubsiteExtension
 ---
 Only:
   moduleexists: 'silverstripe/graphql'
@@ -13,5 +13,5 @@ Only:
 SilverStripe\GraphQL\Controller:
   schema:
     scaffolding_providers:
-      - gorriecoe\Menu\Models\MenuSet
-      - gorriecoe\Menu\Models\MenuLink
+      - Sitelease\LinkMenu\Models\LinkMenuSet
+      - Sitelease\LinkMenu\Models\MenuLink
