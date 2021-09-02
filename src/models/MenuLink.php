@@ -37,13 +37,13 @@ class MenuLink extends Link implements
      * Singular name for CMS
      * @var string
      */
-    private static $singular_name = 'Link';
+    private static $singular_name = 'Menu Link';
 
     /**
      * Plural name for CMS
      * @var string
      */
-    private static $plural_name = 'Links';
+    private static $plural_name = 'Menu Links';
 
     /**
      * Database fields

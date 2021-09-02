@@ -33,7 +33,7 @@ class MenuSetAdmin extends ModelAdmin
      * URL Path for CMS
      * @var string
      */
-    private static $url_segment = 'menus';
+    private static $url_segment = 'link-menu-set-manager';
 
     /**
      * Menu title for Left and Main CMS

@@ -43,13 +43,13 @@ class LinkMenuSet extends DataObject implements
      * Singular name for CMS
      * @var string
      */
-    private static $singular_name = 'Menu';
+    private static $singular_name = 'Menu Set';
 
     /**
      * Plural name for CMS
      * @var string
      */
-    private static $plural_name = 'Menus';
+    private static $plural_name = 'Menu Sets';
 
     /**
      * Database fields
