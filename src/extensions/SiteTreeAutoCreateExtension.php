@@ -26,8 +26,8 @@ class SiteTreeAutoCreateExtension extends DataExtension
         $owns = $owner->config()->get('owns_menu') ? : [];
         $menuSets = ArrayList::create();
 
-        foreach ($owns as $key => $name) {
-            if ($linkMenuSet = LinkMenuSet::get_by_name($name)) {
+        foreach ($owns as $key => $slug) {
+            if ($linkMenuSet = LinkMenuSet::get_by_slug($slug)) {
                 $menuSets->push($linkMenuSet);
             }
         }

@@ -23,15 +23,15 @@ class MenuManagerTemplateProvider implements TemplateGlobalProvider
     }
 
     /**
-     * @param string $name
+     * @param string $slug
      * @return DataList|false
      */
-    public static function LinkMenuSet($name)
+    public static function LinkMenuSet($slug)
     {
-        if (!$name) {
+        if (!$slug) {
             return;
         }
-        if ($linkMenuSet = LinkMenuSet::get_by_name($name)) {
+        if ($linkMenuSet = LinkMenuSet::get_by_slug($slug)) {
             return $linkMenuSet->Links();
         }
     }

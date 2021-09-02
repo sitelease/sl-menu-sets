@@ -261,7 +261,7 @@ class MenuLink extends Link implements
     public static function get_by_sitetreeID($linkMenuSet, int $siteTreeID)
     {
         if (!$linkMenuSet instanceof LinkMenuSet) {
-            $linkMenuSet = LinkMenuSet::get_by_name($linkMenuSet);
+            $linkMenuSet = LinkMenuSet::get_by_slug($linkMenuSet);
         }
         if (!$linkMenuSet) {
             return;
