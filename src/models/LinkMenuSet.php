@@ -97,12 +97,7 @@ class LinkMenuSet extends DataObject implements ScaffoldingProvider
      */
     public function getCMSFields()
     {
-        $fields = FieldList::create(
-            TabSet::create(
-                'Root',
-                Tab::create('Main')
-            )->setTitle(_t(__CLASS__ . '.TABMAIN', 'Main'))
-        );
+        $fields = FieldList::create(TabSet::create('Root')->setTitle(_t(__CLASS__ . '.TABMAIN', 'Main')));
 
         if (empty($this->ID)) {
             $fields->addFieldToTab(
