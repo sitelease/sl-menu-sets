@@ -1,5 +1,5 @@
 {
-  "name": "sitelease/link-menu",
+  "name": "sitelease/sl-menu-sets",
   "description": "Adds multiple menus that are defined via yml (or CMS) and managed via the cms.",
   "type": "silverstripe-vendormodule",
   "license": "BSD-3-Clause",
@@ -14,6 +14,7 @@
     }
   ],
   "keywords": [
+    "sitelease",
     "silverstripe",
     "modular",
     "cms",
@@ -26,7 +27,12 @@
     "symbiote/silverstripe-gridfieldextensions": "^3.1",
     "gorriecoe/silverstripe-link": "^1.1"
   },
+  "autoload": {
+      "psr-4": {
+          "Sitelease\\MenuSets\\": "src/"
+      }
+  },
   "extra": {
-    "installer-name": "menu"
+    "installer-name": "sl-menu-sets"
   }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Sitelease\LinkMenu\Extensions;
+namespace Sitelease\MenuSets\Extensions;
 
 use SilverStripe\Subsites\Model\Subsite;
 use SilverStripe\Forms\FieldList;

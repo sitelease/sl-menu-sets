@@ -1,6 +1,6 @@
 <?php
 
-namespace Sitelease\LinkMenu\Models;
+namespace Sitelease\MenuSets\Models;
 
 use GraphQL\Type\Definition\ResolveInfo;
 use SilverStripe\Control\Controller;

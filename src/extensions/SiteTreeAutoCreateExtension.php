@@ -1,9 +1,9 @@
 <?php
 
-namespace Sitelease\LinkMenu\Extensions;
+namespace Sitelease\MenuSets\Extensions;
 
-use Sitelease\LinkMenu\Models\LinkMenuSet;
-use Sitelease\LinkMenu\Models\MenuLink;
+use Sitelease\MenuSets\Models\LinkMenuSet;
+use Sitelease\MenuSets\Models\MenuLink;
 use SilverStripe\ORM\ArrayList;
 use SilverStripe\ORM\DataExtension;
 

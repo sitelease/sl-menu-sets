@@ -1,8 +1,8 @@
 <?php
 
-namespace Sitelease\LinkMenu\Admin;
+namespace Sitelease\MenuSets\Admin;
 
-use Sitelease\LinkMenu\Models\LinkMenuSet;
+use Sitelease\MenuSets\Models\LinkMenuSet;
 use SilverStripe\Admin\ModelAdmin;
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Forms\FieldList;

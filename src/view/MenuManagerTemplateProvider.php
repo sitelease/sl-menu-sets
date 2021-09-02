@@ -1,8 +1,8 @@
 <?php
 
-namespace Sitelease\LinkMenu\View;
+namespace Sitelease\MenuSets\View;
 
-use Sitelease\LinkMenu\Models\LinkMenuSet;
+use Sitelease\MenuSets\Models\LinkMenuSet;
 use SilverStripe\View\TemplateGlobalProvider;
 
 /**

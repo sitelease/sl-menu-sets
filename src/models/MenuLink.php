@@ -1,6 +1,6 @@
 <?php
 
-namespace Sitelease\LinkMenu\Models;
+namespace Sitelease\MenuSets\Models;
 
 use gorriecoe\Link\Models\Link;
 use SilverStripe\Forms\FieldList;
@@ -253,10 +253,10 @@ class MenuLink extends Link implements
     /**
      * Return the first menulink matching the given LinkMenuSet and SiteTreeID.
      *
-     * @param Sitelease\LinkMenu\Models\LinkMenuSet|String
+     * @param Sitelease\MenuSets\Models\LinkMenuSet|String
      * @param Int
      *
-     * @return Sitelease\LinkMenu\Models\MenuLink|Null
+     * @return Sitelease\MenuSets\Models\MenuLink|Null
      */
     public static function get_by_sitetreeID($linkMenuSet, int $siteTreeID)
     {

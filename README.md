@@ -1,12 +1,6 @@
-# Silverstripe Link Menus
+# Silverstripe Link Base Menu Sets
 
 Similar to [Gorrie Coe's silverstripe-menu module](https://github.com/gorriecoe/silverstripe-menu) but it allows users to create items within the CMS admin interface as well
-
-## Installation
-Composer is the recommended way of installing SilverStripe modules.
-```
-composer require sitelease/silverstripe-menu
-```
 
 ## Requirements
 
@@ -20,10 +14,10 @@ composer require sitelease/silverstripe-menu
 
 ## Creating custom menus
 
-As it is common to reference MenuSets by name/title in templates, you can configure sets to be created automatically during the /dev/build task. These sets cannot be deleted through the CMS.
+As it is common to reference menu sets by name/title in templates, you can configure sets to be created automatically during the /dev/build task. These sets cannot be deleted through the CMS.
 
 ```
-Sitelease\LinkMenu\Models\LinkMenuSet:
+Sitelease\MenuSets\Models\LinkMenuSet:
   sets:
     main: Main menu
     secondary: Another menu
@@ -34,7 +28,7 @@ Sitelease\LinkMenu\Models\LinkMenuSet:
 By default menus will be flat, which means links can not have child links associated with them.  If you need a nested menu structure, you can do so by adding `allow_children: true` to the yml file as shown below.
 
 ```
-Sitelease\LinkMenu\Models\LinkMenuSet:
+Sitelease\MenuSets\Models\LinkMenuSet:
   sets:
     footer:
       title: Footer menu
@@ -52,7 +46,7 @@ If you need to automatically add links to a menu after the creation of a page, y
 ```
 Page:
   extensions:
-    - Sitelease\LinkMenu\Extensions\SiteTreeAutoCreateExtension
+    - Sitelease\MenuSets\Extensions\SiteTreeAutoCreateExtension
   owns_menu:
     - main
     - footer
