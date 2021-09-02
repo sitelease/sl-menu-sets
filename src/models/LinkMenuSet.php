@@ -29,9 +29,7 @@ use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
  * @method HasManyList|MenuLink[] Links()
  * @package silverstripe-menu
  */
-class LinkMenuSet extends DataObject implements
-    PermissionProvider,
-    ScaffoldingProvider
+class LinkMenuSet extends DataObject implements ScaffoldingProvider
 {
     /**
      * Defines the database table name
