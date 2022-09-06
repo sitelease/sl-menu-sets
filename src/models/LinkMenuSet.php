@@ -21,8 +21,6 @@ use SilverStripe\ORM\ManyManyList;
 use SilverStripe\Security\Permission;
 use SilverStripe\Security\PermissionProvider;
 use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
-use SilverStripe\GraphQL\Scaffolding\Interfaces\ScaffoldingProvider;
-use SilverStripe\GraphQL\Scaffolding\Scaffolders\SchemaScaffolder;
 
 use SilverStripe\ORM\DataObject;
 /**
@@ -34,7 +32,7 @@ use SilverStripe\ORM\DataObject;
  * @method HasManyList|MenuLink[] Links()
  * @package silverstripe-menu
  */
-class LinkMenuSet extends DataObject implements ScaffoldingProvider
+class LinkMenuSet extends DataObject
 {
     /**
      * Defines the database table name
@@ -322,47 +320,6 @@ class LinkMenuSet extends DataObject implements ScaffoldingProvider
         return $this->Links()->filter([
             'ParentID' => 0
         ]);
-    }
-
-    public function provideGraphQLScaffolding(SchemaScaffolder $scaffolder)
-    {
-        $scaffolder->type(LinkMenuSet::class)
-            ->addAllFields()
-            ->nestedQuery('Links')
-            ->setUsePagination(false)
-            ->end()
-            ->operation(SchemaScaffolder::READ)
-            ->setName('readMenuSets')
-            ->setUsePagination(false)
-            ->end()
-            ->operation(SchemaScaffolder::CREATE)
-            ->setName('createMenuSet')
-            ->end()
-            ->operation(SchemaScaffolder::UPDATE)
-            ->setName('updateMenuSet')
-            ->end()
-            ->operation(SchemaScaffolder::DELETE)
-            ->setName('deleteMenuSet')
-            ->end()
-            ->end()
-            ->query('readOneMenuSet', LinkMenuSet::class)
-            ->setUsePagination(false)
-            ->addArgs([
-                'Slug' => 'String!'
-            ])
-            ->setResolver(function ($object, array $args, $context, ResolveInfo $info) {
-                if (!singleton(LinkMenuSet::class)->canView($context['currentUser'])) {
-                    throw new \InvalidArgumentException(sprintf(
-                        '%s view access not permitted',
-                        LinkMenuSet::class
-                    ));
-                }
-                if ($args['Slug']) {
-                    return LinkMenuSet::get()->find('Slug', $args['Slug']);
-                }
-            })
-            ->end();
-        return $scaffolder;
     }
 
     /**
