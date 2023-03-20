@@ -71,6 +71,11 @@ class LinkMenuSet extends DataObject
         'Links' => MenuLink::class,
     ];
 
+    // Cache key invalidation settings
+    private static array $cares = [
+        "Links",
+    ];
+
     /**
      * Defines summary fields commonly used in table columns
      * as a quick overview of the data for this dataobject
